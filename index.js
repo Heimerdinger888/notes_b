@@ -179,8 +179,8 @@ app.put('/api/notes/:id', (request, response)=>{
         important: Boolean(body.important)||false,
         id: body.id,
     }
-
-    notes = notes.concat(note)
+    const newNotes = notes.filter(note=>note.id !== body.id)
+    notes = newNotes.concat(note)
 
     console.log(note)
     response.json(note)
