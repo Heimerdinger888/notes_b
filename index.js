@@ -165,6 +165,28 @@ app.delete('/api/notes/:id', (request, response)=>{
     response.status(204).end()
 })
 
+app.put('/api/notes/:id', (request, response)=>{
+    const body = request.body
+
+    if(!body.content){
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
+
+    const note = {
+        content: body.content,
+        important: Boolean(body.important)||false,
+        id: body.id,
+    }
+
+    notes = notes.concat(note)
+
+    console.log(note)
+    response.json(note)
+
+})
+
 const PORT = process.env.PORT||3001
 app.listen(PORT,()=>{
     console.log('server running on port '+PORT)
